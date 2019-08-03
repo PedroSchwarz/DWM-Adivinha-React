@@ -64,12 +64,12 @@ const Adivinha = () => {
 
   if (estado === "FIM") {
     return (
-      <>
+      <div>
         <p>
           Acertei o número {palpite} com {numPalpites} chutes
         </p>
         <button onClick={iniciarJogo}>Jogar novamente</button>
-      </>
+      </div>
     );
   }
 
