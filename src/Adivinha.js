@@ -27,17 +27,29 @@ const Adivinha = () => {
     setPalpite(250);
   };
 
-  const menor = () => {
-    setNumPalpites(numPalpites + 1);
-    setMaximo(palpite);
-    const proxPalpite = parseInt((palpite - minimo) / 2) + minimo;
-    setPalpite(proxPalpite);
-  };
+  //   const menor = () => {
+  //     setNumPalpites(numPalpites + 1);
+  //     setMaximo(palpite);
+  //     const proxPalpite = parseInt((palpite - minimo) / 2) + minimo;
+  //     setPalpite(proxPalpite);
+  //   };
 
-  const maior = () => {
+  //   const maior = () => {
+  //     setNumPalpites(numPalpites + 1);
+  //     setMinimo(palpite);
+  //     const proxPalpite = parseInt((maximo - palpite) / 2) + palpite;
+  //     setPalpite(proxPalpite);
+  //   };
+
+  const proxPalpite = acao => {
     setNumPalpites(numPalpites + 1);
-    setMinimo(palpite);
-    const proxPalpite = parseInt((maximo - palpite) / 2) + palpite;
+    acao === "menor" ? setMaximo(palpite) : setMinimo(palpite);
+    const proxPalpite =
+      acao === "menor"
+        ? parseInt((palpite + minimo) / 2)
+        : parseInt((maximo + palpite) / 2);
+    // const proxPalpite = parseInt((maximo + minimo) / 2);
+    console.log(proxPalpite);
     setPalpite(proxPalpite);
   };
 
@@ -57,6 +69,10 @@ const Adivinha = () => {
           <button className="start-button" onClick={iniciarJogo}>
             Começar o jogo
           </button>
+          <img
+            src="https://musatotech.co.za/wp-content/uploads/2018/04/machine-learning-Musato-Technologies-300x256.png"
+            alt=""
+          />
         </div>
       </div>
     );
@@ -64,22 +80,50 @@ const Adivinha = () => {
 
   if (estado === "FIM") {
     return (
-      <div>
-        <p>
+      <div className="end-page">
+        <h1>
           Acertei o número {palpite} com {numPalpites} chutes
-        </p>
+        </h1>
         <button onClick={iniciarJogo}>Jogar novamente</button>
+        <img
+          className="balloons"
+          src="https://notesonatheory.files.wordpress.com/2012/12/balloon-clipart-5.png"
+          alt=""
+        />
+        <img
+          className="balloons"
+          src="https://notesonatheory.files.wordpress.com/2012/12/balloon-clipart-5.png"
+          alt=""
+        />
+        <img
+          className="balloons"
+          src="https://notesonatheory.files.wordpress.com/2012/12/balloon-clipart-5.png"
+          alt=""
+        />
       </div>
     );
   }
 
   return (
-    <>
-      <p>O seu número é {palpite}</p>
-      <button onClick={menor}>Menor</button>
-      <button onClick={acertou}>Acertou</button>
-      <button onClick={maior}>Maior</button>
-    </>
+    <div className="playing-page">
+      <h1 className="cpu-answer">
+        O seu número é <span className="guessed-number">{palpite}</span>
+      </h1>
+      <span className="question-mark">?</span>
+      <span className="question-mark">?</span>
+      <span className="question-mark">?</span>
+      <div>
+        <button className="lower-btn" onClick={() => proxPalpite("menor")}>
+          Menor
+        </button>
+        <button className="correct-btn" onClick={acertou}>
+          Acertou
+        </button>
+        <button className="higher-btn" onClick={() => proxPalpite("maior")}>
+          Maior
+        </button>
+      </div>
+    </div>
   );
 };
 
