@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.start-page {
+    display: flex;
+}
+
+.start-page div {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.start-page div:nth-child(1) {
+    background-color: rgb(196, 127, 23);
+    color: #ffffff;
+}
+
+.start-page div:nth-child(2) {
+    background-color: rgb(226, 167, 77);
+    color: #ffffff;
+}
+
+.start-page div h1 {
+    margin: 2rem;
+    font-size: 3rem;
+}
+
+.start-page div p {
+    margin: 2rem;
+    font-size: 1.5rem;
+    text-align: justify;
+}
+
+.start-page div button {
+    padding: 1.1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(233, 203, 37);
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
