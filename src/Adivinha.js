@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Adivinha.css";
 
 const Adivinha = () => {
@@ -10,6 +10,11 @@ const Adivinha = () => {
   const [maximo, setMaximo] = useState(501);
   // PALPITE DA MÁQUINA
   const [palpite, setPalpite] = useState(250);
+
+  useEffect(() => {
+    const proxPalpite = parseInt((maximo + minimo) / 2);
+    setPalpite(proxPalpite);
+  }, [maximo, minimo]);
 
   const iniciarJogo = () => {
     setEstado("JOGANDO");
@@ -41,16 +46,15 @@ const Adivinha = () => {
   //     setPalpite(proxPalpite);
   //   };
 
-  const proxPalpite = acao => {
+  const proxPalpite = async acao => {
     setNumPalpites(numPalpites + 1);
     acao === "menor" ? setMaximo(palpite) : setMinimo(palpite);
-    const proxPalpite =
-      acao === "menor"
-        ? parseInt((palpite + minimo) / 2)
-        : parseInt((maximo + palpite) / 2);
+    // const proxPalpite =
+    //   acao === "menor"
+    //     ? parseInt((palpite + minimo) / 2)
+    //     : parseInt((maximo + palpite) / 2);
     // const proxPalpite = parseInt((maximo + minimo) / 2);
-    console.log(proxPalpite);
-    setPalpite(proxPalpite);
+    // setPalpite(proxPalpite);
   };
 
   if (estado === "ENTRADA") {
@@ -59,10 +63,10 @@ const Adivinha = () => {
         <div>
           <h1>Jogo do Adivinha</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ipsum
-            deserunt vel excepturi unde voluptatibus quia, tempore ullam placeat
-            ab nostrum, aliquam in et eligendi perferendis cum quaerat
-            asperiores? Molestias.
+            Como funciona o jogo? O jogador pensa em um número entre 0 e 500, o
+            computador dá um palpite. Caso sejá um número menor do que o
+            palpite, o jogador aperta o botão "Menor", caso sejá maior, o botão
+            "Maior" e se o computador acertou, o botão "Acertou". Simples assim!
           </p>
         </div>
         <div>
@@ -107,19 +111,27 @@ const Adivinha = () => {
   return (
     <div className="playing-page">
       <h1 className="cpu-answer">
-        O seu número é <span className="guessed-number">{palpite}</span>
+        O seu número é <span className="guessed-number">{palpite}</span>?
       </h1>
       <span className="question-mark">?</span>
       <span className="question-mark">?</span>
       <span className="question-mark">?</span>
       <div>
-        <button className="lower-btn" onClick={() => proxPalpite("menor")}>
+        <button
+          className="lower-btn"
+          disabled={palpite === 0}
+          onClick={() => proxPalpite("menor")}
+        >
           Menor
         </button>
         <button className="correct-btn" onClick={acertou}>
           Acertou
         </button>
-        <button className="higher-btn" onClick={() => proxPalpite("maior")}>
+        <button
+          className="higher-btn"
+          disabled={palpite === 500}
+          onClick={() => proxPalpite("maior")}
+        >
           Maior
         </button>
       </div>

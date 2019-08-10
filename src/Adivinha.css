@@ -21,6 +21,10 @@ button {
     box-shadow: 0 5px 1px rgb(143, 123, 10);
 }
 
+button[disabled] {
+    opacity: 0.5;
+}
+
 button:hover {
     background-color: rgb(226, 199, 46);
 }
@@ -196,9 +200,9 @@ button:focus {
     position: absolute;
     z-index: 1;
     bottom: 0;
-    height: 200px;
+    height: 300px;
     width: 200px;
-    animation: floatUp 2s linear infinite;
+    animation: floatUp 5s linear infinite;
 }
 
 @keyframes floatUp {
@@ -219,7 +223,7 @@ button:focus {
     }
 
     100% {
-        transform: translate(0, -100vh);
+        transform: translate(6rem, -100vh);
     }
 }
 
